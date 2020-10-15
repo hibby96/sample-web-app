@@ -9,7 +9,7 @@ public class App {
 
     public static void main(String[] args) {
         Tomcat server = new Tomcat();
-        server.setPort(8080);
+        server.setPort(80);
         server.setBaseDir(new File("target/tomcat").getAbsolutePath());
         server.getConnector();
         server.addWebapp("", new File("src/main/static").getAbsolutePath());
