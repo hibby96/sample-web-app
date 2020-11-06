@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: hibbysamplewebapp 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hibbysamplewebapp
+  template:
+    metadata:
+      labels:
+        app: hibbysamplewebapp 
+    spec:
+      containers:
+        - name: hibbysamplewebapp 
+          image: willhacr.azurecr.io/hibbysamplewebapp
+          ports:
+          - containerPort: 80
