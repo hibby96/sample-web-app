@@ -48,6 +48,7 @@ stages:
           repository: $(imageRepository)
           dockerfile: $(dockerfilePath)
           containerRegistry: $(dockerRegistryServiceConnection)
+          buildContext: '$(Agent.BuildDirectory)/s'
           tags: |
             $(tag)
             
