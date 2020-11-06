@@ -39,7 +39,7 @@ stages:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
-- stage: Image-Build
+- stage: Image_Build
   displayName: Build stage
   jobs:  
   - job: Build
