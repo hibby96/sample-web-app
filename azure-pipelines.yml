@@ -61,6 +61,15 @@ stages:
   - job: Test
     displayName: test
     steps:
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'SONAR_TOKEN'
+        organization: 'hibby96'
+        scannerMode: 'Other'
+    - task: SonarCloudAnalyze@1
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
     
 
 - stage: Deploy
