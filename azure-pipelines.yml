@@ -53,6 +53,15 @@ stages:
       - upload: manifests
         artifact: manifests
 
+- stage: Test
+  displayName: Test stage
+  dependsOn: Build
+
+  jobs:
+  - job: Test
+    displayName: test
+    steps:
+    
 
 - stage: Deploy
   displayName: Deploy stage
