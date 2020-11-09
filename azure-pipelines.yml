@@ -81,7 +81,7 @@ stages:
       displayName: "Run trivy scan"
       inputs:
         script: |
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy --ignore-unfixed $(imageRepository):$(Build.BuildId)
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy --ignore-unfixed $(containerRegistry)/$(imageRepository):$(tag)
 
     
 
