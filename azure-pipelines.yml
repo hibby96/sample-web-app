@@ -69,21 +69,11 @@ stages:
             
       - upload: manifests
         artifact: manifests
-
-- stage: Quality_Check
-  displayName: Quality_Check
-  dependsOn: Build
-  jobs:
-  - job: Trivy
-    displayName: Trivy
-    steps:
-    - task: CmdLine@2
-      displayName: "Run trivy scan"
-      inputs:
-        script: |
-          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy --ignore-unfixed $(containerRegistry)/$(imageRepository):$(tag)
-
-    
+      - task: CmdLine@2
+        displayName: "Run trivy scan"
+        inputs:
+          script: |
+            docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy --ignore-unfixed $(containerRegistry)/$(imageRepository):$(tag)
 
 - stage: Deploy
   displayName: Deploy stage
