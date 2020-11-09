@@ -35,6 +35,12 @@ stages:
           versionSpec: '11'
           jdkArchitectureOption: 'x64'
           jdkSourceOption: 'PreInstalled'
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'SONAR_TOKEN'
+          organization: 'hibby96'
+          scannerMode: 'Other'
+
       - task: Maven@3
         inputs:
           mavenPomFile: 'pom.xml'
@@ -46,6 +52,10 @@ stages:
           effectivePomSkip: false
           sonarQubeRunAnalysis: true
           sqMavenPluginVersionChoice: 'latest'
+      - task: SonarCloudPublish@1
+        inputs:
+          pollingTimeoutSec: '300'
+
       - task: Docker@2
         displayName: Build and push an image to container registry
         inputs:
@@ -63,17 +73,6 @@ stages:
   displayName: Quality_Check
   dependsOn: Build
   jobs:
-  - job: Sonar
-    displayName: Sonar
-    steps:
-    - task: SonarCloudPrepare@1
-      inputs:
-          SonarCloud: 'SONAR_TOKEN'
-          organization: 'hibby96'
-          scannerMode: 'Other'
-    - task: SonarCloudPublish@1
-      inputs:
-        pollingTimeoutSec: '300'
   - job: Trivy
     displayName: Trivy
     steps:
